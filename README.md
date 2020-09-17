@@ -5,7 +5,7 @@
 
 ## About
 
-This action must be used for aplication the bids:
+This action may be used to execute the following applications:
 
 - [black](https://github.com/psf/black)
 - [pylint](https://www.pylint.org/)
@@ -40,6 +40,8 @@ steps:
       use-black: false
       use-mypy: false
       use-isort: false
+      use-docformatter: false
+      use-pydocstyle: false
       extra-pylint-options: ""
       extra-pycodestyle-options: ""
       extra-flake8-options: ""
@@ -62,6 +64,10 @@ black --check $(extra-black-options) $(python-root-list)
 mypy $(extra-mypy-options) $(python-root-list)
 
 isort $(extra-isort-options) $(python-root-list) -c --diff
+
+docformatter ${python-root-list}
+
+pydocstyle ${python-root-list}
 ```
 
 ## Versions used

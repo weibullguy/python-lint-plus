@@ -9,18 +9,20 @@
 # $5 - use-black
 # $6 - use-mypy
 # $7 - use-isort
-# $8 - extra-pylint-options
-# $9 - extra-pycodestyle-options
-# ${10} - extra-flake8-options
-# ${11} - extra-black-options
-# ${12} - extra-mypy-options
-# ${13} - extra-isort-options
+# $8 - use-docformatter
+# $9 - use-pydocstyle
+# $10 - extra-pylint-options
+# $11 - extra-pycodestyle-options
+# ${12} - extra-flake8-options
+# ${13} - extra-black-options
+# ${14} - extra-mypy-options
+# ${15} - extra-isort-options
 
 if [ "$2" = true ] ; then
 
-    echo Running: pylint $8 $1
+    echo Running: pylint ${10} $1
 
-    pylint $8 $1
+    pylint ${10} $1
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
@@ -35,9 +37,9 @@ fi
 
 if [ "$3" = true ] ; then
 
-    echo Running: pycodestyle $9 $1
+    echo Running: pycodestyle ${11} $1
 
-    pycodestyle $9 $1
+    pycodestyle ${11} $1
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
@@ -51,9 +53,9 @@ fi
 
 if [ "$4" = true ] ; then
 
-    echo Running: flake8 ${10} $1
+    echo Running: flake8 ${12} $1
 
-    flake8 ${10} $1
+    flake8 ${12} $1
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
@@ -67,9 +69,9 @@ fi
 
 if [ "$5" = true ] ; then
 
-    echo Running: black --check ${11} $1
+    echo Running: black --check ${13} $1
 
-    black --check ${11} $1
+    black --check ${13} $1
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
@@ -83,9 +85,9 @@ fi
 
 if [ "$6" = true ] ; then
 
-    echo Running: mypy ${12} $1
+    echo Running: mypy ${14} $1
 
-    mypy ${12} $1
+    mypy ${14} $1
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
@@ -99,9 +101,9 @@ fi
 
 if [ "$7" = true ] ; then
 
-    echo Running: isort ${13} $1 -c --diff
+    echo Running: isort ${15} $1 -c --diff
 
-    isort ${13} $1 -c --diff
+    isort ${15} $1 -c --diff
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
@@ -111,4 +113,34 @@ if [ "$7" = true ] ; then
         exit $exit_code
     fi
 
+fi
+
+if [ "$8" = true ] ; then
+
+    echo Running: docformatter $1
+
+    docformatter $1
+    exit_code=$?
+
+    if [ "$exit_code" = "0" ]; then
+        echo "docformetter ok"
+    else
+        echo "docformatter error"
+        echo $exit_code
+    fi
+fi
+
+if [ "$9" = true ] ; then
+
+    echo Running: pydocstyle $1
+
+    pydocstyle $1
+    exit_code=$?
+
+    if [ "$exit_code" = 0 ]; then
+        echo "pydocstyle ok"
+    else
+        echo "pydocstyle error"
+        echo $exit_code
+    fi
 fi
