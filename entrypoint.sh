@@ -20,6 +20,21 @@
 # ${16} - extra-docformatter-options
 # ${17} - extra-pydocstyle-options
 
+if [ "$8" = true ] ; then
+
+    echo Running: docformatter ${16} $1
+
+    docformatter ${16} $1
+    exit_code=$?
+
+    if [ "$exit_code" = "0" ]; then
+        echo "docformetter ok"
+    else
+        echo "docformatter error"
+        echo $exit_code
+    fi
+fi
+
 if [ "$2" = true ] ; then
 
     echo Running: pylint ${10} $1
@@ -51,6 +66,21 @@ if [ "$3" = true ] ; then
         exit $exit_code
     fi
 
+fi
+
+if [ "$9" = true ] ; then
+
+    echo Running: pydocstyle ${17} $1
+
+    pydocstyle ${17} $1
+    exit_code=$?
+
+    if [ "$exit_code" = 0 ]; then
+        echo "pydocstyle ok"
+    else
+        echo "pydocstyle error"
+        echo $exit_code
+    fi
 fi
 
 if [ "$4" = true ] ; then
@@ -115,35 +145,5 @@ if [ "$7" = true ] ; then
         exit $exit_code
     fi
 
-fi
-
-if [ "$8" = true ] ; then
-
-    echo Running: docformatter ${16} $1
-
-    docformatter ${16} $1
-    exit_code=$?
-
-    if [ "$exit_code" = "0" ]; then
-        echo "docformetter ok"
-    else
-        echo "docformatter error"
-        echo $exit_code
-    fi
-fi
-
-if [ "$9" = true ] ; then
-
-    echo Running: pydocstyle ${17} $1
-
-    pydocstyle ${17} $1
-    exit_code=$?
-
-    if [ "$exit_code" = 0 ]; then
-        echo "pydocstyle ok"
-    else
-        echo "pydocstyle error"
-        echo $exit_code
-    fi
 fi
 
