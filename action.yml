@@ -1,5 +1,5 @@
 name: "Python Code Quality and Lint"
-description: "Supports Pylint, pycodestyle, Flake8, black, mypy and isort"
+description: "Supports Pylint, pycodestyle, pydocstyle, Flake8, black, mypy, docformatter, and isort"
 inputs:
   python-root-list:
     description: "A list of all paths to test"
@@ -11,6 +11,10 @@ inputs:
     default: true
   use-pycodestyle:
     description: "Use pycodestyle"
+    required: false
+    default: true
+  use-pydocstyle:
+    description: "Use pydocstyle"
     required: false
     default: true
   use-flake8:
@@ -25,6 +29,10 @@ inputs:
     description: "Use mypy"
     required: false
     default: true
+  use-docformatter:
+    description: "Use docformatter"
+    required: false
+    default: true
   use-isort:
     description: "Use isort"
     required: false
@@ -35,6 +43,10 @@ inputs:
     default: ""
   extra-pycodestyle-options:
     description: "Extra options: pycodestyle $(extra-pycodestyle-options) $(python-root-list)"
+    required: false
+    default: ""
+  extra-pydocstyle-options:
+    description: "Extra options: pydocstyle $(extra-pydocstyle-options) $(python-root-list)"
     required: false
     default: ""
   extra-flake8-options:
@@ -49,6 +61,10 @@ inputs:
     description: "Extra options: mypy $(extra-mypy-options) $(python-root-list)"
     required: false
     default: ""
+  extra-docformatter-options:
+    description: "Extra options: docformatter $(extra-docformatter-options) $(python-root-list)"
+    required: false
+    default: ""
   extra-isort-options:
     description: "Extra options: isort -rc $(extra-isort-options) $(python-root-list) -c --diff "
     required: false
@@ -61,15 +77,18 @@ runs:
     - ${{ inputs.python-root-list }}
     - ${{ inputs.use-pylint }}
     - ${{ inputs.use-pycodestyle }}
+    - ${{ inputs.use-pydocstyle }}
     - ${{ inputs.use-flake8 }}
     - ${{ inputs.use-black }}
     - ${{ inputs.use-mypy }}
+    - ${{ inputs.use-docformatter }}
     - ${{ inputs.use-isort }}
     - ${{ inputs.extra-pylint-options }}
     - ${{ inputs.extra-pycodestyle-options }}
     - ${{ inputs.extra-flake8-options }}
     - ${{ inputs.extra-black-options }}
     - ${{ inputs.extra-mypy-options }}
+    - ${{ inputs.extra-docformatter-options }}
     - ${{ inputs.extra-isort-options }}
 branding:
   icon: "terminal"

@@ -17,6 +17,8 @@
 # ${13} - extra-black-options
 # ${14} - extra-mypy-options
 # ${15} - extra-isort-options
+# ${16} - extra-docformatter-options
+# ${17} - extra-pydocstyle-options
 
 if [ "$2" = true ] ; then
 
@@ -117,9 +119,9 @@ fi
 
 if [ "$8" = true ] ; then
 
-    echo Running: docformatter $1
+    echo Running: docformatter ${16} $1
 
-    docformatter $1
+    docformatter ${16} $1
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
@@ -132,9 +134,9 @@ fi
 
 if [ "$9" = true ] ; then
 
-    echo Running: pydocstyle $1
+    echo Running: pydocstyle ${17} $1
 
-    pydocstyle $1
+    pydocstyle ${17} $1
     exit_code=$?
 
     if [ "$exit_code" = 0 ]; then
@@ -144,3 +146,4 @@ if [ "$9" = true ] ; then
         echo $exit_code
     fi
 fi
+
