@@ -57,7 +57,7 @@ if [ "$8" = true ] ; then
 
     echo Running: docformatter ${16} $1
 
-    docformatter ${16} $1
+    docformatter ${16} -c --recursive $1
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
