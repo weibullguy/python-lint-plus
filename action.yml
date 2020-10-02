@@ -1,4 +1,4 @@
-name: "Python Code Quality and Lint"
+name: "Python Code Style, Quality, and Lint"
 description: "Supports Pylint, pycodestyle, pydocstyle, Flake8, black, mypy, docformatter, and isort"
 inputs:
   python-root-list:
