@@ -55,9 +55,9 @@ fi
 
 if [ "$8" = true ] ; then
 
-    echo Running: docformatter ${16} $1
+    echo Running: docformatter -c --recursive ${16} $1
 
-    docformatter ${16} -c --recursive $1
+    docformatter -c --recursive ${16} $1
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
