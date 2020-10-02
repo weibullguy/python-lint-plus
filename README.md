@@ -1,7 +1,7 @@
 # python-lint
 
 <p align="left">
-  <a href="https://github.com/ricardochaves/python-lint"><img alt="All lints status" src="https://github.com/ricardochaves/python-lint/workflows/all-lints/badge.svg"></a></p>
+  <a href="https://github.com/weibullguy/python-lint"><img alt="All lints status" src="https://github.com/weibullguy/python-lint/workflows/all-lints/badge.svg"></a></p>
 
 ## About
 
@@ -25,7 +25,7 @@ Basic:
 ```yml
 steps:
   - uses: actions/checkout@v1
-  - uses: ricardochaves/python-lint@v1.3.0
+  - uses: weibullguy/python-lint@master
 ```
 
 Options:
@@ -33,7 +33,7 @@ Options:
 ```yml
 steps:
   - uses: actions/checkout@v1
-  - uses: ricardochaves/python-lint@v1.3.0
+  - uses: weibullguy/python-lint@master
     with:
       python-root-list: "python_alelo tests"
       use-pylint: false
@@ -76,7 +76,7 @@ pydocstyle $(extra-pydocstyle-options) $(python-root-list)
 
 ## Versions used
 
-To identify the version used you must consult the [CHANGELOG.md](https://github.com/ricardochaves/python-lint-image/blob/master/CHANGELOG.md) of the image used in our [Dockerfile](Dockerfile).
+To identify the version used you must consult the [CHANGELOG.md](https://github.com/weibullguy/python-lint-image/blob/master/CHANGELOG.md) of the image used in our [Dockerfile](Dockerfile).
 
 ## License
 

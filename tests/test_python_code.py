@@ -1,4 +1,4 @@
-"""Just one teste"""
+"""Just one test"""
 
 import uuid
 
@@ -10,5 +10,5 @@ def get_name_len(name: str) -> int:
 
 def start():
     "Run ... "
-    print(get_name_len("Ricardo"))
+    print(get_name_len("Doyle"))
     print(uuid.uuid4().hex)
