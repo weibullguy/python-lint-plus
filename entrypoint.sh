@@ -62,6 +62,8 @@ if [ "$8" = true ] ; then
 
     if [ "$exit_code" = "0" ]; then
         echo "docformatter ok"
+    elif [ "$exit_code" = "3" ]; then
+        echo "docformatter wants to format one or more files"
     else
         echo "docformatter error"
         echo $exit_code
