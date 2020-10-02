@@ -13,6 +13,8 @@ This action may be used to execute the following applications:
 - [pycodestyle](https://pycodestyle.readthedocs.io)
 - [flake8](http://flake8.pycqa.org)
 - [mypy](http://mypy-lang.org/)
+- [docformatter](https://github.com/myint/docformatter)
+- [pydocstyle](https://github.com/PyCQA/pydocstyle/)
 
 ## Usage
 
@@ -48,6 +50,8 @@ steps:
       extra-black-options: ""
       extra-mypy-options: ""
       extra-isort-options: ""
+      extra-docformatter-options: ""
+      extra-pydocstyle-options: ""
 ```
 
 Command build logic list:
@@ -65,9 +69,9 @@ mypy $(extra-mypy-options) $(python-root-list)
 
 isort $(extra-isort-options) $(python-root-list) -c --diff
 
-docformatter ${python-root-list}
+docformatter $(extra-docformatter-options) $(python-root-list)
 
-pydocstyle ${python-root-list}
+pydocstyle $(extra-pydocstyle-options) $(python-root-list)
 ```
 
 ## Versions used

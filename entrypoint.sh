@@ -20,6 +20,39 @@
 # ${16} - extra-docformatter-options
 # ${17} - extra-pydocstyle-options
 
+# Run the autoformatters first.
+if [ "$5" = true ] ; then
+
+    echo Running: black --check ${13} $1
+
+    black --check ${13} $1
+    exit_code=$?
+
+    if [ "$exit_code" = "0" ]; then
+        echo "Black ok"
+    else
+        echo "Black error"
+        exit $exit_code
+    fi
+
+fi
+
+if [ "$7" = true ] ; then
+
+    echo Running: isort ${15} $1 -c --diff
+
+    isort ${15} $1 -c --diff
+    exit_code=$?
+
+    if [ "$exit_code" = "0" ]; then
+        echo "isort ok"
+    else
+        echo "isort error"
+        exit $exit_code
+    fi
+
+fi
+
 if [ "$8" = true ] ; then
 
     echo Running: docformatter ${16} $1
@@ -28,30 +61,14 @@ if [ "$8" = true ] ; then
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
-        echo "docformetter ok"
+        echo "docformatter ok"
     else
         echo "docformatter error"
         echo $exit_code
     fi
 fi
 
-if [ "$2" = true ] ; then
-
-    echo Running: pylint ${10} $1
-
-    pylint ${10} $1
-    exit_code=$?
-
-    if [ "$exit_code" = "0" ]; then
-        echo "Pylint ok"
-    else
-        echo "Pylint error"
-        exit $exit_code
-    fi
-
-fi
-
-
+# Then check the autoformatter results.
 if [ "$3" = true ] ; then
 
     echo Running: pycodestyle ${11} $1
@@ -83,38 +100,7 @@ if [ "$9" = true ] ; then
     fi
 fi
 
-if [ "$4" = true ] ; then
-
-    echo Running: flake8 ${12} $1
-
-    flake8 ${12} $1
-    exit_code=$?
-
-    if [ "$exit_code" = "0" ]; then
-        echo "Flake8 ok"
-    else
-        echo "Flake8 error"
-        exit $exit_code
-    fi
-
-fi
-
-if [ "$5" = true ] ; then
-
-    echo Running: black --check ${13} $1
-
-    black --check ${13} $1
-    exit_code=$?
-
-    if [ "$exit_code" = "0" ]; then
-        echo "Black ok"
-    else
-        echo "Black error"
-        exit $exit_code
-    fi
-
-fi
-
+# Next type check everything.
 if [ "$6" = true ] ; then
 
     echo Running: mypy ${14} $1
@@ -131,17 +117,34 @@ if [ "$6" = true ] ; then
 
 fi
 
-if [ "$7" = true ] ; then
+# Finally, lint the code.
+if [ "$2" = true ] ; then
 
-    echo Running: isort ${15} $1 -c --diff
+    echo Running: pylint ${10} $1
 
-    isort ${15} $1 -c --diff
+    pylint ${10} $1
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
-        echo "isort ok"
+        echo "Pylint ok"
     else
-        echo "isort error"
+        echo "Pylint error"
+        exit $exit_code
+    fi
+
+fi
+
+if [ "$4" = true ] ; then
+
+    echo Running: flake8 ${12} $1
+
+    flake8 ${12} $1
+    exit_code=$?
+
+    if [ "$exit_code" = "0" ]; then
+        echo "Flake8 ok"
+    else
+        echo "Flake8 error"
         exit $exit_code
     fi
 
