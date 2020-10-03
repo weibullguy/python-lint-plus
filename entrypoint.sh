@@ -3,29 +3,29 @@
 # Parameters
 #
 # $1 - python-root-list
-# $2 - use-pylint
-# $3 - use-pycodestyle
-# $4 - use-flake8
-# $5 - use-black
-# $6 - use-mypy
-# $7 - use-isort
-# $8 - use-docformatter
-# $9 - use-pydocstyle
-# $10 - extra-pylint-options
-# $11 - extra-pycodestyle-options
-# ${12} - extra-flake8-options
-# ${13} - extra-black-options
-# ${14} - extra-mypy-options
-# ${15} - extra-isort-options
-# ${16} - extra-docformatter-options
-# ${17} - extra-pydocstyle-options
+# $2 - use-black
+# $3 - use-isort
+# $4 - use-docformatter
+# $5 - use-pycodestyle
+# $6 - use-pydocstyle
+# $7 - use-mypy
+# $8 - use-pylint
+# $9 - use-flake8
+# $10 - extra-black-options
+# $11 - extra-isort-options
+# ${12} - extra-docformatter-options
+# ${13} - extra-pycodestyle-options
+# ${14} - extra-pydocstyle-options
+# ${15} - extra-mypy-options
+# ${16} - extra-pylint-options
+# ${17} - extra-flake8-options
 
 # Run the autoformatters first.
-if [ "$5" = true ] ; then
+if [ "$2" = true ] ; then
 
-    echo Running: black --check ${13} $1
+    echo Running: black --check ${10} $1
 
-    black --check ${13} $1
+    black --check ${10} $1
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
@@ -37,11 +37,11 @@ if [ "$5" = true ] ; then
 
 fi
 
-if [ "$7" = true ] ; then
+if [ "$3" = true ] ; then
 
-    echo Running: isort ${15} $1 -c --diff
+    echo Running: isort ${11} $1 -c --diff
 
-    isort ${15} $1 -c --diff
+    isort ${11} $1 -c --diff
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
@@ -53,11 +53,11 @@ if [ "$7" = true ] ; then
 
 fi
 
-if [ "$8" = true ] ; then
+if [ "$4" = true ] ; then
 
-    echo Running: docformatter -c --recursive ${16} $1
+    echo Running: docformatter -c --recursive ${12} $1
 
-    docformatter -c --recursive ${16} $1
+    docformatter -c --recursive ${12} $1
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
@@ -71,11 +71,11 @@ if [ "$8" = true ] ; then
 fi
 
 # Then check the autoformatter results.
-if [ "$3" = true ] ; then
+if [ "$5" = true ] ; then
 
-    echo Running: pycodestyle ${11} $1
+    echo Running: pycodestyle ${13} $1
 
-    pycodestyle ${11} $1
+    pycodestyle ${13} $1
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
@@ -87,11 +87,11 @@ if [ "$3" = true ] ; then
 
 fi
 
-if [ "$9" = true ] ; then
+if [ "$6" = true ] ; then
 
-    echo Running: pydocstyle ${17} $1
+    echo Running: pydocstyle ${14} $1
 
-    pydocstyle ${17} $1
+    pydocstyle ${14} $1
     exit_code=$?
 
     if [ "$exit_code" = 0 ]; then
@@ -103,11 +103,11 @@ if [ "$9" = true ] ; then
 fi
 
 # Next type check everything.
-if [ "$6" = true ] ; then
+if [ "$7" = true ] ; then
 
-    echo Running: mypy ${14} $1
+    echo Running: mypy ${15} $1
 
-    mypy ${14} $1
+    mypy ${15} $1
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
@@ -120,11 +120,11 @@ if [ "$6" = true ] ; then
 fi
 
 # Finally, lint the code.
-if [ "$2" = true ] ; then
+if [ "$8" = true ] ; then
 
-    echo Running: pylint ${10} $1
+    echo Running: pylint ${16} $1
 
-    pylint ${10} $1
+    pylint ${16} $1
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
@@ -136,11 +136,11 @@ if [ "$2" = true ] ; then
 
 fi
 
-if [ "$4" = true ] ; then
+if [ "$9" = true ] ; then
 
-    echo Running: flake8 ${12} $1
+    echo Running: flake8 ${17} $1
 
-    flake8 ${12} $1
+    flake8 ${17} $1
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
