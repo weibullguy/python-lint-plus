@@ -1,5 +1,5 @@
 name: "Python Code Style, Quality, and Lint"
-description: "Supports Pylint, pycodestyle, pydocstyle, Flake8, black, mypy, docformatter, and isort"
+description: "Supports black, yapf, isort, docformatter, pycodestyle, pydocstyle, mypy, pylint, and flake8"
 inputs:
   python-root-list:
     description: "A list of all paths to test"
@@ -8,7 +8,11 @@ inputs:
   use-black:
     description: "Use Black"
     required: false
-    default: true
+    default: false
+  use-yapf:
+    description: "Use yapf"
+    required: false
+    default: false
   use-isort:
     description: "Use isort"
     required: false
@@ -39,6 +43,10 @@ inputs:
     default: true
   extra-black-options:
     description: "Extra options: black --check $(extra-black-options) $(python-root-list)"
+    required: false
+    default: ""
+  extra-yapf-options:
+    description: "Extra options: yapf $(extra-yapf-optsion) $(python-root-list)"
     required: false
     default: ""
   extra-isort-options:
@@ -76,6 +84,7 @@ runs:
   args:
     - ${{ inputs.python-root-list }}
     - ${{ inputs.use-black }}
+    - ${{ inputs.use-yapf }}
     - ${{ inputs.use-isort }}
     - ${{ inputs.use-docformatter }}
     - ${{ inputs.use-pycodestyle }}
@@ -84,6 +93,7 @@ runs:
     - ${{ inputs.use-pylint }}
     - ${{ inputs.use-flake8 }}
     - ${{ inputs.extra-black-options }}
+    - ${{ inputs.extra-yapf-options }}
     - ${{ inputs.extra-isort-options }}
     - ${{ inputs.extra-docformatter-options }}
     - ${{ inputs.extra-pycodestyle-options }}

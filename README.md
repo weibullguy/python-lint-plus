@@ -11,6 +11,7 @@ but I added some tools that I like to use.
 This action may be used to execute the following applications:
 
 - [black](https://github.com/psf/black)
+- [yapf](https://github.com/google/yapf)
 - [isort](https://github.com/timothycrosley/isort)
 - [docformatter](https://github.com/myint/docformatter)
 - [pycodestyle](https://pycodestyle.readthedocs.io)
@@ -28,6 +29,11 @@ However, you could choose to have fixes applies by each tool.  If you do, it's
 recommended that the autoformatters come first, followed by the style checking
 tools to verify the autoformatter results.  After this, the type checkers and
 linters can be run.
+
+All tools are enabled by default with the exception of black and yapf.  It's
+certainly your prerogative to use as many autoformatters as you'd like, but I
+recommend using only one.  Which you choose should be enabled with the
+use-black or use-yapf input.
 
 ## Usage
 
@@ -50,6 +56,7 @@ steps:
     with:
       python-root-list: "python_alelo tests"
       use-black: false
+      use-yapf: false
       use-isort: false
       use-docformatter: false
       use-pycodestyle: false
@@ -58,6 +65,7 @@ steps:
       use-pylint: false
       use-flake8: false
       extra-black-options: ""
+      extra-yapf-options: ""
       extra-isort-options: ""
       extra-docformatter-options: ""
       extra-pycodestyle-options: ""
@@ -71,6 +79,8 @@ Command build logic list:
 
 ```bash
 black --check $(extra-black-options) $(python-root-list)
+
+yapf $(extra-yapf-options) $(python-root-list) --diff
 
 isort $(extra-isort-options) $(python-root-list) -c --diff
 
