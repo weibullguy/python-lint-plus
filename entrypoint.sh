@@ -46,7 +46,7 @@ if [ "$3" = true ]; then
     yapf ${12} $1
     exit_code=$?
 
-    if "$exit_code" = "0" ]; then
+    if [ "$exit_code" = "0" ]; then
         echo "yapf ok"
     else
         echo "yapf error"
