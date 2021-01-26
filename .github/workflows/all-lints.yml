@@ -11,3 +11,4 @@ jobs:
       - uses: weibullguy/python-lint@master
         with:
           python-root-list: "tests"
+          extra-rstcheck-options: "-r"
