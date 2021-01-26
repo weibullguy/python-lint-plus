@@ -1,5 +1,5 @@
 name: "Python Code Style, Quality, and Lint"
-description: "Supports black, yapf, isort, docformatter, pycodestyle, pydocstyle, mypy, pylint, flake8, mccabe, radon, rstcheck, check-manifest, and pyroma"
+description: "Supports a plethora of tools for checking your Python code and packages"
 inputs:
   python-root-list:
     description: "A list of all paths to test"
