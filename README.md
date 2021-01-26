@@ -19,6 +19,11 @@ This action may be used to execute the following applications:
 - [mypy](http://mypy-lang.org/)
 - [pylint](https://www.pylint.org/)
 - [flake8](http://flake8.pycqa.org)
+- [mccabe](https://github.com/pycqa/mccabe)
+- [radon](https://pypi.org/project/radon/)
+- [rstcheck](https://github.com/myint/rstcheck)
+- [check-manifest](https://github.com/mgedmin/check-manifest)
+- [pyroma](https://github.com/regebro/pyroma)
 
 The default for each tool is check only, not make automatic changes.  It's
 recommended that the tools you use in this action be used in-line with your
@@ -64,6 +69,11 @@ steps:
       use-mypy: false
       use-pylint: false
       use-flake8: false
+      use-mccabe: false
+      use-radon: false
+      use-rstcheck: false
+      use-check-manifest: false
+      use-pyroma: false
       extra-black-options: ""
       extra-yapf-options: ""
       extra-isort-options: ""
@@ -73,6 +83,11 @@ steps:
       extra-mypy-options: ""
       extra-pylint-options: ""
       extra-flake8-options: ""
+      extra-mccabe-options: ""
+      extra-radon-options: ""
+      extra-rstcheck-options: ""
+      extra-manifest-options: ""
+      extra-pyroma-options: ""
 ```
 
 Command build logic list:
@@ -95,7 +110,35 @@ mypy $(extra-mypy-options) $(python-root-list)
 pylint $(extra-pylint-options) $(python-root-list)
 
 flake8 $(extra-flake8-options) $(python-root-list)
+
+python -m mccabe $(extra-mccabe-options) $(python-root-list)
+
+radon $(extra-radon-options) $(python-root-list)
+
+rstcheck $(extra-rstcheck-options) $(python-root-list)
+
+check-manifest $(extra-manifest-options) .
+
+pyroma $(extra-pyroma-options) .
 ```
+
+When using radon, you will have to specify which check (cc, raw, mi, or hal)
+you want to run in the extra-radon-options argument.  For example, the 
+following snippet will cause radon to run the Cyclomatic Complexity check on 
+the files.
+
+```yml
+steps:
+  - uses: actions/checkout@v2
+  - uses: weibullguy/python-lint-plus@master
+    with:
+      python-root-list: "python_alelo tests"
+      use-radon: true
+      extra-radon-options: "cc -s"
+```
+
+To run multiple radon checks, you'll need to add a step for each in your
+workflow file.
 
 ## Versions used
 

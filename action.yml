@@ -1,5 +1,5 @@
 name: "Python Code Style, Quality, and Lint"
-description: "Supports black, yapf, isort, docformatter, pycodestyle, pydocstyle, mypy, pylint, and flake8"
+description: "Supports black, yapf, isort, docformatter, pycodestyle, pydocstyle, mypy, pylint, flake8, mccabe, radon, rstcheck, check-manifest, and pyroma"
 inputs:
   python-root-list:
     description: "A list of all paths to test"
@@ -41,6 +41,26 @@ inputs:
     description: "Use Flake8"
     required: false
     default: true
+  use-mccabe:
+    description: "Use mccabe"
+    required: false
+    default: false
+  use-radon:
+    description: "Use radon"
+    required: false
+    default: false
+  use-rstcheck:
+    description: "Use rstcheck"
+    required: false
+    default: true
+  use-check-manifest:
+    description: "Use check-manifest"
+    required: false
+    default: true
+  use-pyroma:
+    description: "Use pyroma"
+    required: false
+    default: true
   extra-black-options:
     description: "Extra options: black --check $(extra-black-options) $(python-root-list)"
     required: false
@@ -77,6 +97,26 @@ inputs:
     description: "Extra options: flake8 $(extra-flake8-options) $(python-root-list)"
     required: false
     default: ""
+  extra-mccabe-options:
+    description: "Extra options: python -m mccabe $(extra-mccabe-options) $(python-root-list)"
+    required: false
+    default: ""
+  extra-radon-options:
+    description: "Extra options: radon $(extra-radon-options) $(python-root-list)"
+    required: false
+    default: ""
+  extra-rstcheck-options:
+    description: "Extra options: rstcheck $(extra-rstcheck-options) $(python-root-list)"
+    required: false
+    default: ""
+  extra-manifest-options:
+    description: "Extra options: check-manifest $(extra-manifest-options) ."
+    required: false
+    default: ""
+  extra-pyroma-options:
+    description: "Extra options: pyroma $(extra-manifest-options) ."
+    required: false
+    default: ""
 
 runs:
   using: "docker"
@@ -92,6 +132,11 @@ runs:
     - ${{ inputs.use-mypy }}
     - ${{ inputs.use-pylint }}
     - ${{ inputs.use-flake8 }}
+    - ${{ inputs.use-mccabe }}
+    - ${{ inputs.use-radon }}
+    - ${{ inputs.use-rstcheck }}
+    - ${{ inputs.use-check-manifest }}
+    - ${{ inputs.use-pyroma }}
     - ${{ inputs.extra-black-options }}
     - ${{ inputs.extra-yapf-options }}
     - ${{ inputs.extra-isort-options }}
@@ -101,6 +146,11 @@ runs:
     - ${{ inputs.extra-mypy-options }}
     - ${{ inputs.extra-pylint-options }}
     - ${{ inputs.extra-flake8-options }}
+    - ${{ inputs.extra-mccabe-options }}
+    - ${{ inputs.extra-radon-options }}
+    - ${{ inputs.extra-rstcheck-options }}
+    - ${{ inputs.extra-manifest-options }}
+    - ${{ inputs.extra-pyroma-options }}
 branding:
   icon: "terminal"
   color: "white"
