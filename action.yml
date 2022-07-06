@@ -25,6 +25,10 @@ inputs:
     description: "Use pycodestyle"
     required: false
     default: true
+  use-autopep8:
+    description: "Use autopep8"
+    required: false
+    default: false
   use-pydocstyle:
     description: "Use pydocstyle"
     required: false
@@ -81,6 +85,10 @@ inputs:
     description: "Extra options: pycodestyle $(extra-pycodestyle-options) $(python-root-list)"
     required: false
     default: ""
+  extra-autopep8-options:
+    description: "Extra options: autopep8 $(extra-autopep8-options) $(python-root-list)"
+    required: false
+    default: ""
   extra-pydocstyle-options:
     description: "Extra options: pydocstyle $(extra-pydocstyle-options) $(python-root-list)"
     required: false
@@ -128,6 +136,7 @@ runs:
     - ${{ inputs.use-isort }}
     - ${{ inputs.use-docformatter }}
     - ${{ inputs.use-pycodestyle }}
+    - ${{ inputs.use-autopep8 }}
     - ${{ inputs.use-pydocstyle }}
     - ${{ inputs.use-mypy }}
     - ${{ inputs.use-pylint }}
@@ -142,6 +151,7 @@ runs:
     - ${{ inputs.extra-isort-options }}
     - ${{ inputs.extra-docformatter-options }}
     - ${{ inputs.extra-pycodestyle-options }}
+    - ${{ inputs.extra-autopep8-options }}
     - ${{ inputs.extra-pydocstyle-options }}
     - ${{ inputs.extra-mypy-options }}
     - ${{ inputs.extra-pylint-options }}

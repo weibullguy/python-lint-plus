@@ -8,36 +8,38 @@
 # $4 - use-isort
 # $5 - use-docformatter
 # $6 - use-pycodestyle
-# $7 - use-pydocstyle
-# $8 - use-mypy
-# $9 - use-pylint
-# $10 - use-flake8
-# ${11} - use mccabe
-# ${12} - use radon
-# ${13} - use-rstcheck
-# ${14} - use-check-manifest
-# ${15} - use-pyroma
-# ${16} - extra-black-options
-# ${17} - extra-yapf-options
-# ${18} - extra-isort-options
-# ${19} - extra-docformatter-options
-# ${20} - extra-pycodestyle-options
-# ${21} - extra-pydocstyle-options
-# ${22} - extra-mypy-options
-# ${23} - extra-pylint-options
-# ${24} - extra-flake8-options
-# ${25} - extra-mccabe-options
-# ${26} - extra-radon-options
-# ${27} - extra-rstcheck-options
-# ${28} - extra-manifest-options
-# ${29} - extra-pyroma-options
+# #7 - use-autopep8
+# $8 - use-pydocstyle
+# $9 - use-mypy
+# $10 - use-pylint
+# ${11} - use-flake8
+# ${12} - use mccabe
+# ${13} - use radon
+# ${14} - use-rstcheck
+# ${15} - use-check-manifest
+# ${16} - use-pyroma
+# ${17} - extra-black-options
+# ${18} - extra-yapf-options
+# ${19} - extra-isort-options
+# ${20} - extra-docformatter-options
+# ${21} - extra-pycodestyle-options
+# ${22} - extra-autopep8-options
+# ${23} - extra-pydocstyle-options
+# ${24} - extra-mypy-options
+# ${25} - extra-pylint-options
+# ${26} - extra-flake8-options
+# ${27} - extra-mccabe-options
+# ${28} - extra-radon-options
+# ${29} - extra-rstcheck-options
+# ${30} - extra-manifest-options
+# ${31} - extra-pyroma-options
 
 # Run the autoformatters first.
 if [ "$2" = true ] ; then
 
-    echo Running: black --check ${16} $1
+    echo Running: black --check ${17} $1
 
-    black --check ${16} $1
+    black --check ${17} $1
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
@@ -51,9 +53,9 @@ fi
 
 if [ "$3" = true ]; then
 
-    echo Running: yapf ${17} $1
+    echo Running: yapf ${18} $1
 
-    yapf ${17} $1
+    yapf ${18} $1
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
@@ -67,9 +69,9 @@ fi
 
 if [ "$4" = true ] ; then
 
-    echo Running: isort ${18} $1 -c --diff
+    echo Running: isort ${19} $1 -c --diff
 
-    isort ${18} $1 -c --diff
+    isort ${19} $1 -c --diff
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
@@ -83,9 +85,9 @@ fi
 
 if [ "$5" = true ] ; then
 
-    echo Running: docformatter -c --recursive ${19} $1
+    echo Running: docformatter -c --recursive ${20} $1
 
-    docformatter -c --recursive ${19} $1
+    docformatter -c --recursive ${20} $1
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
@@ -101,9 +103,9 @@ fi
 # Then check the autoformatter results.
 if [ "$6" = true ] ; then
 
-    echo Running: pycodestyle ${20} $1
+    echo Running: pycodestyle ${21} $1
 
-    pycodestyle ${20} $1
+    pycodestyle ${21} $1
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
@@ -117,9 +119,25 @@ fi
 
 if [ "$7" = true ] ; then
 
-    echo Running: pydocstyle ${21} $1
+    echo Running: autopep8 ${22} $1
 
-    pydocstyle ${21} $1
+    autopep8 ${22} $1
+    exit_code=$?
+
+    if [ "$exit_code" = 0 ]; then
+        echo "autopep8 ok"
+    else
+        echo "autopep8 error"
+        echo $exit_code
+    fi
+
+fi
+
+if [ "$8" = true ] ; then
+
+    echo Running: pydocstyle ${23} $1
+
+    pydocstyle ${23} $1
     exit_code=$?
 
     if [ "$exit_code" = 0 ]; then
@@ -131,11 +149,11 @@ if [ "$7" = true ] ; then
 fi
 
 # Next type check everything.
-if [ "$8" = true ] ; then
+if [ "$9" = true ] ; then
 
-    echo Running: mypy ${22} $1
+    echo Running: mypy ${24} $1
 
-    mypy ${22} $1
+    mypy ${24} $1
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
@@ -148,11 +166,11 @@ if [ "$8" = true ] ; then
 fi
 
 # Finally, lint the code.
-if [ "$9" = true ] ; then
+if [ "${10}" = true ] ; then
 
-    echo Running: pylint ${23} $1
+    echo Running: pylint ${25} $1
 
-    pylint ${23} $1
+    pylint ${25} $1
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
@@ -164,11 +182,11 @@ if [ "$9" = true ] ; then
 
 fi
 
-if [ "${10}" = true ] ; then
+if [ "${11}" = true ] ; then
 
-    echo Running: flake8 ${24} $1
+    echo Running: flake8 ${26} $1
 
-    flake8 ${24} $1
+    flake8 ${26} $1
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
@@ -181,11 +199,11 @@ if [ "${10}" = true ] ; then
 fi
 
 # Check code maintainability
-if [ "${11}" = true ]; then
+if [ "${12}" = true ]; then
 
-    echo Running: mccabe ${25} $1
+    echo Running: mccabe ${27} $1
 
-    python -m mccabe ${25} $1
+    python -m mccabe ${27} $1
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
@@ -196,11 +214,11 @@ if [ "${11}" = true ]; then
     fi
 fi
 
-if [ "${12}" = true ]; then
+if [ "${13}" = true ]; then
 
-    echo Running: radon ${26} $1
+    echo Running: radon ${28} $1
 
-    radon ${26} $1
+    radon ${28} $1
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
@@ -212,11 +230,11 @@ if [ "${12}" = true ]; then
 fi
 
 # Check rst files
-if [ "${13}" = true ]; then
+if [ "${14}" = true ]; then
 
-    echo Running: rstcheck ${27} $1
+    echo Running: rstcheck ${29} $1
 
-    rstcheck ${27} $1
+    rstcheck ${29} $1
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
@@ -228,11 +246,11 @@ if [ "${13}" = true ]; then
 fi
 
 # Check packaging
-if [ "${14}" = true ]; then
+if [ "${15}" = true ]; then
 
-    echo Running: check-manifest ${28} .
+    echo Running: check-manifest ${30} .
 
-    check-manifest ${28} .
+    check-manifest ${30} .
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
@@ -243,11 +261,11 @@ if [ "${14}" = true ]; then
     fi
 fi
 
-if [ "${15}" = true ]; then
+if [ "${16}" = true ]; then
 
-    echo Running: pyroma ${29} .
+    echo Running: pyroma ${31} .
 
-    pyroma ${29} .
+    pyroma ${31} .
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then

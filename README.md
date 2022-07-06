@@ -15,6 +15,7 @@ This action may be used to execute the following applications:
 - [isort](https://github.com/timothycrosley/isort)
 - [docformatter](https://github.com/myint/docformatter)
 - [pycodestyle](https://pycodestyle.readthedocs.io)
+- [autopep8](https://github.com/hhatto/autopep8)
 - [pydocstyle](https://github.com/PyCQA/pydocstyle/)
 - [mypy](http://mypy-lang.org/)
 - [pylint](https://www.pylint.org/)
@@ -65,6 +66,7 @@ steps:
       use-isort: false
       use-docformatter: false
       use-pycodestyle: false
+      use-autopep8: false
       use-pydocstyle: false
       use-mypy: false
       use-pylint: false
@@ -102,6 +104,8 @@ isort $(extra-isort-options) $(python-root-list) -c --diff
 docformatter $(extra-docformatter-options) $(python-root-list)
 
 pycodestyle $(extra-pycodestyle-options) $(python-root-list)
+
+autopep8 $(extra-autopep8-options) $(python-root-list)
 
 pydocstyle $(extra-pydocstyle-options) $(python-root-list)
 
