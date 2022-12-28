@@ -39,6 +39,8 @@ if [ "$2" = true ] ; then
 
     echo Running: black --check ${17} $1
 
+    pip install black==22.12.0
+
     black --check ${17} $1
     exit_code=$?
 
