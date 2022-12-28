@@ -139,6 +139,8 @@ if [ "$8" = true ] ; then
 
     echo Running: pydocstyle ${23} $1
 
+    pip install pydocstyle==6.1.1
+
     pydocstyle ${23} $1
     exit_code=$?
 
