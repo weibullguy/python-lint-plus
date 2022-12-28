@@ -1,1 +1,1 @@
-"""Tests for all style checks."""
+"""Tests package for python-lint-plus."""

@@ -8,7 +8,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
-      - uses: weibullguy/python-lint@master
+      - uses: weibullguy/python-lint-plus@master
         with:
           python-root-list: "tests"
           use-check-manifest: false
