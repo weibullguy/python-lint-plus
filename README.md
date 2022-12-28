@@ -31,15 +31,16 @@ recommended that the tools you use in this action be used in-line with your
 editor or IDE and/or as pre-commit hooks.  This action just verifies you didn't
 forget to do that.
 
-However, you could choose to have fixes applied by each tool.  If you do, it's
-recommended that the autoformatters come first, followed by the style checking
-tools to verify the autoformatter results.  After this, the type checkers and
-linters can be run.
-
 All tools are enabled by default with the exception of black and yapf.  It's
 certainly your prerogative to use as many autoformatters as you'd like, but I
 recommend using only one.  Which you choose should be enabled with the
 use-black or use-yapf input.
+
+Each run of the action creates a virtual environment.  Each of the enabled
+tools is installed in this virtual environment before that tool is executed.
+The default name of the virtual environment is ```python-lint-plus```, but you 
+can set it to whatever you'd like with the ```virtual-env``` option.
+This can be helpful if your running a matrix of various versions of python.
 
 ## Usage
 
@@ -61,21 +62,37 @@ steps:
   - uses: weibullguy/python-lint-plus@master
     with:
       python-root-list: "tests"
+      virtual-env: "python-lint-plus"
       use-black: false
+      black-version:
       use-yapf: false
+      yapf-version:
       use-isort: false
+      isort-version:
       use-docformatter: false
+      docformatter-version:
       use-pycodestyle: false
+      pycodestyle-version:
       use-autopep8: false
+      autopep8-version:
       use-pydocstyle: false
+      pydocstyle-version:
       use-mypy: false
+      mypy-version:
       use-pylint: false
+      pylint-version:
       use-flake8: false
+      flake8-version:
       use-mccabe: false
+      mccabe-version:
       use-radon: false
+      radon-version:
       use-rstcheck: false
+      rstcheck-version:
       use-check-manifest: false
+      check-manifest-version:
       use-pyroma: false
+      pyroma-version:
       extra-black-options: ""
       extra-yapf-options: ""
       extra-isort-options: ""
@@ -136,7 +153,8 @@ steps:
   - uses: actions/checkout@v2
   - uses: weibullguy/python-lint-plus@master
     with:
-      python-root-list: "python_alelo tests"
+      python-root-list: "tests"
+      virtual-environment: "python-lint-plus"
       use-radon: true
       extra-radon-options: "cc -s"
 ```
@@ -144,9 +162,27 @@ steps:
 To run multiple radon checks, you'll need to add a step for each in your
 workflow file.
 
-## Versions used
+## Tool Versions Used
 
-To identify the version used you must consult the [CHANGELOG.md](https://github.com/weibullguy/python-lint-image/blob/master/CHANGELOG.md) of the image used in the [Dockerfile](Dockerfile).
+If the version input is left unset, the action will use the latest version of
+the tool available on PyPi.  In the following example action.yml, the 
+docformatter version used will be 1.5.0, the isort version used will be the
+latest available on PyPi, and the pydocstyle version used will be the latest
+available on PyPi with a version number greater than or equal to 6.1.0.
+
+```yml
+steps:
+  - uses: actions/checkout@v2
+  - uses: weibullguy/python-lint-plus@master
+    with:
+      python-root-list: "tests"
+      virtual-env: "python-lint-plus"
+      use-docformatter: true
+      docformatter-version: "==1.5.0"
+      use-isort: true 
+      use-pydocstyle: true
+      pydocstyle-version: ">=6.1.0"
+```
 
 ## License
 

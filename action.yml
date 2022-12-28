@@ -5,66 +5,130 @@ inputs:
     description: "A list of all paths to test"
     required: false
     default: "."
+  virtual-env:
+    description: "The name of the virtual environment to use for running the tools"
+    required: false
+    default: "python-lint-plus"
   use-black:
     description: "Use Black"
     required: false
     default: false
+  black-version:
+    description: "The version of black to use"
+    required: false
+    default: ""
   use-yapf:
     description: "Use yapf"
     required: false
     default: false
+  yapf-version:
+    description: "The version of yapf to use"
+    required: false
+    default: ""
   use-isort:
     description: "Use isort"
     required: false
     default: true
+  isort-version:
+    description: "The version of isort to use"
+    required: false
+    default: ""
   use-docformatter:
     description: "Use docformatter"
     required: false
     default: true
+  docformatter-version:
+    description: "The version of docformatter to use"
+    required: false
+    default: ""
   use-pycodestyle:
     description: "Use pycodestyle"
     required: false
     default: true
+  pycodestyle-version:
+    description: "The version of pycodestyle to use"
+    required: false
+    default: ""
   use-autopep8:
     description: "Use autopep8"
     required: false
     default: false
+  autopep8-version:
+    description: "The version of autope8 to use"
+    required: false
+    default: ""
   use-pydocstyle:
     description: "Use pydocstyle"
     required: false
     default: true
+  pydocstyle-version:
+    description: "The version of pydocstyle to use"
+    required: false
+    default: ""
   use-mypy:
     description: "Use mypy"
     required: false
     default: true
+  mypy-version:
+    description: "The version of mypy to use"
+    required: false
+    default: ""
   use-pylint:
     description: "Use Pylint"
     required: false
     default: true
+  pylint-version:
+    description: "The version of pylint to use"
+    required: false
+    default: ""
   use-flake8:
     description: "Use Flake8"
     required: false
     default: true
+  flake8-version:
+    description: "The version of flake8 to use"
+    required: false
+    default: ""
   use-mccabe:
     description: "Use mccabe"
     required: false
     default: false
+  mccabe-version:
+    description: "The version of mccabe to use"
+    required: false
+    default: ""
   use-radon:
     description: "Use radon"
     required: false
     default: false
+  radon-version:
+    description: "The version of radon to use"
+    required: false
+    default: ""
   use-rstcheck:
     description: "Use rstcheck"
     required: false
     default: true
+  rstcheck-version:
+    description: "The version of rstcheck to use"
+    required: false
+    default: ""
   use-check-manifest:
     description: "Use check-manifest"
     required: false
     default: true
+  check-manifest-version:
+    description: "The version of check-manifest to use"
+    required: false
+    default: ""
   use-pyroma:
     description: "Use pyroma"
     required: false
     default: true
+  pyroma-version:
+    description: "The version of pyroma to use"
+    required: false
+    default: ""
   extra-black-options:
     description: "Extra options: black --check $(extra-black-options) $(python-root-list)"
     required: false
@@ -131,21 +195,37 @@ runs:
   image: "Dockerfile"
   args:
     - ${{ inputs.python-root-list }}
+    - ${{ inputs.virtual-env }}
     - ${{ inputs.use-black }}
+    - ${{ inputs.black-version }}
     - ${{ inputs.use-yapf }}
+    - ${{ inputs.yapf-version }}
     - ${{ inputs.use-isort }}
+    - ${{ inputs.isort-version }}
     - ${{ inputs.use-docformatter }}
+    - ${{ inputs.docformatter-version }}
     - ${{ inputs.use-pycodestyle }}
+    - ${{ inputs.pycodestyle-version }}
     - ${{ inputs.use-autopep8 }}
+    - ${{ inputs.autopep8-version }}
     - ${{ inputs.use-pydocstyle }}
+    - ${{ inputs.pydocstyle-version }}
     - ${{ inputs.use-mypy }}
+    - ${{ inputs.mypy-version }}
     - ${{ inputs.use-pylint }}
+    - ${{ inputs.pylint-version }}
     - ${{ inputs.use-flake8 }}
+    - ${{ inputs.flake8-version }}
     - ${{ inputs.use-mccabe }}
+    - ${{ inputs.mccabe-version }}
     - ${{ inputs.use-radon }}
+    - ${{ inputs.radon-version }}
     - ${{ inputs.use-rstcheck }}
+    - ${{ inputs.rstcheck-version }}
     - ${{ inputs.use-check-manifest }}
+    - ${{ inputs.check-manifest-version }}
     - ${{ inputs.use-pyroma }}
+    - ${{ inputs.pyroma-version }}
     - ${{ inputs.extra-black-options }}
     - ${{ inputs.extra-yapf-options }}
     - ${{ inputs.extra-isort-options }}
