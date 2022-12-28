@@ -1,2 +1,1 @@
-"""Tests package for python-lint-plus"""
-
+"""Tests package for python-lint-plus."""

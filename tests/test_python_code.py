@@ -9,6 +9,6 @@ def get_name_len(name: str) -> int:
 
 
 def start():
-    "Run ... "
+    "Run ..."
     print(get_name_len("Doyle"))
     print(uuid.uuid4().hex)
