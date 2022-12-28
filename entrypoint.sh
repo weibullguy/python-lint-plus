@@ -144,7 +144,7 @@ if [ "$8" = true ] ; then
         echo "pydocstyle ok"
     else
         echo "pydocstyle error"
-        echo $exit_code
+        exit $exit_code
     fi
 fi
 
