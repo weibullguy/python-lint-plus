@@ -14,3 +14,4 @@ jobs:
           use-check-manifest: false
           use-pyroma: false
           extra-rstcheck-options: "-r"
+          docformatter-version: "==1.5.0"

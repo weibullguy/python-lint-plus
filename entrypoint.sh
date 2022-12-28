@@ -3,45 +3,68 @@
 # Parameters
 #
 # $1 - python-root-list
-# $2 - use-black
-# $3 - use-yapf
-# $4 - use-isort
-# $5 - use-docformatter
-# $6 - use-pycodestyle
-# #7 - use-autopep8
-# $8 - use-pydocstyle
-# $9 - use-mypy
-# $10 - use-pylint
-# ${11} - use-flake8
-# ${12} - use mccabe
-# ${13} - use radon
-# ${14} - use-rstcheck
-# ${15} - use-check-manifest
-# ${16} - use-pyroma
-# ${17} - extra-black-options
-# ${18} - extra-yapf-options
-# ${19} - extra-isort-options
-# ${20} - extra-docformatter-options
-# ${21} - extra-pycodestyle-options
-# ${22} - extra-autopep8-options
-# ${23} - extra-pydocstyle-options
-# ${24} - extra-mypy-options
-# ${25} - extra-pylint-options
-# ${26} - extra-flake8-options
-# ${27} - extra-mccabe-options
-# ${28} - extra-radon-options
-# ${29} - extra-rstcheck-options
-# ${30} - extra-manifest-options
-# ${31} - extra-pyroma-options
+# $2 - virtual-env
+# $3 - use-black
+# $4 - black-version
+# $5 - use-yapf
+# $6 - yapf-version
+# $7 - use-isort
+# $8 - isort-version
+# $9 - use-docformatter
+# $10 - docformatter-version
+# ${11} - use-pycodestyle
+# ${12} - pycodestyle-version
+# ${13} - use-autopep8
+# ${14} - autopep8-version
+# ${15} - use-pydocstyle
+# ${16} - pydocstyle-version
+# ${17} - use-mypy
+# ${18} - mypy-version
+# ${19} - use-pylint
+# ${20} - pylint-version
+# ${21} - use-flake8
+# ${22} - flake8-version
+# ${23} - use mccabe
+# ${24} - mccabe-version
+# ${25} - use radon
+# ${26} - radon-version
+# ${27} - use-rstcheck
+# ${28} - rstcheck-version
+# ${29} - use-check-manifest
+# ${30} - check-manifest-version
+# ${31} - use-pyroma
+# ${32} - pyroma-version
+# ${33} - extra-black-options
+# ${34} - extra-yapf-options
+# ${35} - extra-isort-options
+# ${36} - extra-docformatter-options
+# ${37} - extra-pycodestyle-options
+# ${38} - extra-autopep8-options
+# ${39} - extra-pydocstyle-options
+# ${40} - extra-mypy-options
+# ${41} - extra-pylint-options
+# ${42} - extra-flake8-options
+# ${43} - extra-mccabe-options
+# ${44} - extra-radon-options
+# ${45} - extra-rstcheck-options
+# ${46} - extra-manifest-options
+# ${47} - extra-pyroma-options
+
+# Create a virtual environment to run tools.
+echo "Creating virtual environment: $2"
+python3 -m venv $2
+echo "Activating virtual environment: $2"
+source $2/bin/activate
+pip install -U pip
 
 # Run the autoformatters first.
-if [ "$2" = true ] ; then
+if [ "$3" = true ] ; then
 
-    echo Running: black --check ${17} $1
+    echo Running: black --check ${33} $1
 
-    pip install black==22.12.0
+    pip install black$4
 
-    black --check ${17} $1
+    black --check ${33} $1
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
@@ -53,11 +76,13 @@ if [ "$2" = true ] ; then
 
 fi
 
-if [ "$3" = true ]; then
+if [ "$5" = true ]; then
 
-    echo Running: yapf ${18} $1
+    echo Running: yapf ${34} $1
 
-    yapf ${18} $1
+    pip install yapf$6
+
+    yapf ${34} $1
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
@@ -69,27 +94,31 @@ if [ "$3" = true ]; then
 
 fi
 
-if [ "$4" = true ] ; then
+if [ "$7" = true ] ; then
 
-    echo Running: isort ${19} $1 -c --diff
+    echo Running: isort ${35} $1 -c --diff
 
-    isort ${19} $1 -c --diff
+    pip install isort$8
+
+    isort ${35} $1 -c --diff
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
         echo "isort ok"
     else
-        echo "isort error"
+        echo "isort error $exit_code"
         exit $exit_code
     fi
 
 fi
 
-if [ "$5" = true ] ; then
+if [ "$9" = true ] ; then
 
-    echo Running: docformatter -c --recursive ${20} $1
+    echo Running: docformatter -c --recursive ${36} $1
 
-    docformatter -c --recursive ${20} $1
+    pip install docformatter${10}
+
+    docformatter -c --recursive ${36} $1
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
@@ -103,11 +132,13 @@ if [ "$5" = true ] ; then
 fi
 
 # Then check the autoformatter results.
-if [ "$6" = true ] ; then
+if [ "${11}" = true ] ; then
 
-    echo Running: pycodestyle ${21} $1
+    echo Running: pycodestyle ${37} $1
 
-    pycodestyle ${21} $1
+    pip install pycodestyle${12}
+
+    pycodestyle ${37} $1
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
@@ -119,11 +150,13 @@ if [ "$6" = true ] ; then
 
 fi
 
-if [ "$7" = true ] ; then
+if [ "${13}" = true ] ; then
 
-    echo Running: autopep8 ${22} $1
+    echo Running: autopep8 ${38} $1
 
-    autopep8 ${22} $1
+    pip install autopep8${14}
+
+    autopep8 ${38} $1
     exit_code=$?
 
     if [ "$exit_code" = 0 ]; then
@@ -135,13 +168,13 @@ if [ "$7" = true ] ; then
 
 fi
 
-if [ "$8" = true ] ; then
+if [ "${15}" = true ] ; then
 
-    echo Running: pydocstyle ${23} $1
+    echo Running: pydocstyle ${39} $1
 
-    pip install pydocstyle==6.1.1
+    pip install pydocstyle${16}
 
-    pydocstyle ${23} $1
+    pydocstyle ${39} $1
     exit_code=$?
 
     if [ "$exit_code" = 0 ]; then
@@ -153,11 +186,13 @@ if [ "$8" = true ] ; then
 fi
 
 # Next type check everything.
-if [ "$9" = true ] ; then
+if [ "${17}" = true ] ; then
 
-    echo Running: mypy ${24} $1
+    echo Running: mypy ${40} $1
 
-    mypy ${24} $1
+    pip install mypy${18}
+
+    mypy ${40} $1
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
@@ -170,11 +205,13 @@ if [ "$9" = true ] ; then
 fi
 
 # Finally, lint the code.
-if [ "${10}" = true ] ; then
+if [ "${19}" = true ] ; then
 
-    echo Running: pylint ${25} $1
+    echo Running: pylint ${41} $1
 
-    pylint ${25} $1
+    pip install pylint${20}
+
+    pylint ${41} $1
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
@@ -186,11 +223,13 @@ if [ "${10}" = true ] ; then
 
 fi
 
-if [ "${11}" = true ] ; then
+if [ "${21}" = true ] ; then
 
-    echo Running: flake8 ${26} $1
+    echo Running: flake8 ${42} $1
 
-    flake8 ${26} $1
+    pip install flake8${22}
+
+    flake8 ${42} $1
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
@@ -203,11 +242,13 @@ if [ "${11}" = true ] ; then
 fi
 
 # Check code maintainability
-if [ "${12}" = true ]; then
+if [ "${23}" = true ]; then
 
-    echo Running: mccabe ${27} $1
+    echo Running: mccabe ${43} $1
 
-    python -m mccabe ${27} $1
+    pip install mccabe${24}
+
+    python -m mccabe ${43} $1
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
@@ -218,11 +259,13 @@ if [ "${12}" = true ]; then
     fi
 fi
 
-if [ "${13}" = true ]; then
+if [ "${25}" = true ]; then
 
-    echo Running: radon ${28} $1
+    echo Running: radon ${44} $1
 
-    radon ${28} $1
+    pip install radon${26}
+
+    radon ${44} $1
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
@@ -234,11 +277,13 @@ if [ "${13}" = true ]; then
 fi
 
 # Check rst files
-if [ "${14}" = true ]; then
+if [ "${27}" = true ]; then
 
-    echo Running: rstcheck ${29} $1
+    echo Running: rstcheck ${45} $1
 
-    rstcheck ${29} $1
+    pip install rstcheck${28}
+
+    rstcheck ${45} $1
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
@@ -250,11 +295,13 @@ if [ "${14}" = true ]; then
 fi
 
 # Check packaging
-if [ "${15}" = true ]; then
+if [ "${29}" = true ]; then
 
-    echo Running: check-manifest ${30} .
+    echo Running: check-manifest ${46} .
 
-    check-manifest ${30} .
+    pip install check-manifest${30}
+
+    check-manifest ${46} .
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
@@ -265,11 +312,13 @@ if [ "${15}" = true ]; then
     fi
 fi
 
-if [ "${16}" = true ]; then
+if [ "${31}" = true ]; then
 
-    echo Running: pyroma ${31} .
+    echo Running: pyroma ${47} .
 
-    pyroma ${31} .
+    pip install pyroma${32}
+
+    pyroma ${47} .
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
