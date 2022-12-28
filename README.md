@@ -31,7 +31,7 @@ recommended that the tools you use in this action be used in-line with your
 editor or IDE and/or as pre-commit hooks.  This action just verifies you didn't
 forget to do that.
 
-However, you could choose to have fixes applies by each tool.  If you do, it's
+However, you could choose to have fixes applied by each tool.  If you do, it's
 recommended that the autoformatters come first, followed by the style checking
 tools to verify the autoformatter results.  After this, the type checkers and
 linters can be run.
@@ -60,7 +60,7 @@ steps:
   - uses: actions/checkout@v2
   - uses: weibullguy/python-lint-plus@master
     with:
-      python-root-list: "python_alelo tests"
+      python-root-list: "tests"
       use-black: false
       use-yapf: false
       use-isort: false
