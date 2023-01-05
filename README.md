@@ -40,7 +40,7 @@ Each run of the action creates a virtual environment.  Each of the enabled
 tools is installed in this virtual environment before that tool is executed.
 The default name of the virtual environment is ```python-lint-plus```, but you 
 can set it to whatever you'd like with the ```virtual-env``` option.
-This can be helpful if your running a matrix of various versions of python.
+This can be helpful if you're running a matrix of various versions of python.
 
 ## Usage
 
