@@ -1,5 +1,8 @@
 name: "Python Code Style, Quality, and Lint"
 description: "Supports a plethora of tools for checking your Python code and packages"
+branding:
+  icon: "terminal"
+  color: "white"
 inputs:
   python-root-list:
     description: "A list of all paths to test"
@@ -134,7 +137,7 @@ inputs:
     required: false
     default: ""
   extra-yapf-options:
-    description: "Extra options: yapf $(extra-yapf-optsion) $(python-root-list)"
+    description: "Extra options: yapf $(extra-yapf-options) $(python-root-list)"
     required: false
     default: ""
   extra-isort-options:
@@ -189,58 +192,75 @@ inputs:
     description: "Extra options: pyroma $(extra-manifest-options) ."
     required: false
     default: ""
+  python-version:
+    description: "Python version to use for the run.  Defaults to 3.10."
+    required: false
+    default: '3.10'
+  architecture:
+    description: "The architecture (x86 or x64) to use for the run.  Defaults to x64."
+    required: false
+    default: 'x64'
 
 runs:
-  using: "docker"
-  image: "Dockerfile"
-  args:
-    - ${{ inputs.python-root-list }}
-    - ${{ inputs.virtual-env }}
-    - ${{ inputs.use-black }}
-    - ${{ inputs.black-version }}
-    - ${{ inputs.use-yapf }}
-    - ${{ inputs.yapf-version }}
-    - ${{ inputs.use-isort }}
-    - ${{ inputs.isort-version }}
-    - ${{ inputs.use-docformatter }}
-    - ${{ inputs.docformatter-version }}
-    - ${{ inputs.use-pycodestyle }}
-    - ${{ inputs.pycodestyle-version }}
-    - ${{ inputs.use-autopep8 }}
-    - ${{ inputs.autopep8-version }}
-    - ${{ inputs.use-pydocstyle }}
-    - ${{ inputs.pydocstyle-version }}
-    - ${{ inputs.use-mypy }}
-    - ${{ inputs.mypy-version }}
-    - ${{ inputs.use-pylint }}
-    - ${{ inputs.pylint-version }}
-    - ${{ inputs.use-flake8 }}
-    - ${{ inputs.flake8-version }}
-    - ${{ inputs.use-mccabe }}
-    - ${{ inputs.mccabe-version }}
-    - ${{ inputs.use-radon }}
-    - ${{ inputs.radon-version }}
-    - ${{ inputs.use-rstcheck }}
-    - ${{ inputs.rstcheck-version }}
-    - ${{ inputs.use-check-manifest }}
-    - ${{ inputs.check-manifest-version }}
-    - ${{ inputs.use-pyroma }}
-    - ${{ inputs.pyroma-version }}
-    - ${{ inputs.extra-black-options }}
-    - ${{ inputs.extra-yapf-options }}
-    - ${{ inputs.extra-isort-options }}
-    - ${{ inputs.extra-docformatter-options }}
-    - ${{ inputs.extra-pycodestyle-options }}
-    - ${{ inputs.extra-autopep8-options }}
-    - ${{ inputs.extra-pydocstyle-options }}
-    - ${{ inputs.extra-mypy-options }}
-    - ${{ inputs.extra-pylint-options }}
-    - ${{ inputs.extra-flake8-options }}
-    - ${{ inputs.extra-mccabe-options }}
-    - ${{ inputs.extra-radon-options }}
-    - ${{ inputs.extra-rstcheck-options }}
-    - ${{ inputs.extra-manifest-options }}
-    - ${{ inputs.extra-pyroma-options }}
-branding:
-  icon: "terminal"
-  color: "white"
+  using: "composite"
+  steps:
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ inputs.python-version }}
+        architecture: ${{ inputs.architecture }}
+        cache: pip
+
+    - name: Linux Lint
+      if: ${{ runner.os == 'Linux' }}
+      run: >
+        ${{ github.action_path }}/entrypoint.sh
+        '${{ inputs.python-root-list }}'
+        '${{ inputs.virtual-env }}'
+        ${{ inputs.use-black }}
+        ${{ inputs.black-version }}
+        ${{ inputs.use-yapf }}
+        ${{ inputs.yapf-version }}
+        ${{ inputs.use-isort }}
+        ${{ inputs.isort-version }}
+        ${{ inputs.use-docformatter }}
+        ${{ inputs.docformatter-version }}
+        ${{ inputs.use-pycodestyle }}
+        ${{ inputs.pycodestyle-version }}
+        ${{ inputs.use-autopep8 }}
+        ${{ inputs.autopep8-version }}
+        ${{ inputs.use-pydocstyle }}
+        ${{ inputs.pydocstyle-version }}
+        ${{ inputs.use-mypy }}
+        ${{ inputs.mypy-version }}
+        ${{ inputs.use-pylint }}
+        ${{ inputs.pylint-version }}
+        ${{ inputs.use-flake8 }}
+        ${{ inputs.flake8-version }}
+        ${{ inputs.use-mccabe }}
+        ${{ inputs.mccabe-version }}
+        ${{ inputs.use-radon }}
+        ${{ inputs.radon-version }}
+        ${{ inputs.use-rstcheck }}
+        ${{ inputs.rstcheck-version }}
+        ${{ inputs.use-check-manifest }}
+        ${{ inputs.check-manifest-version }}
+        ${{ inputs.use-pyroma }}
+        ${{ inputs.pyroma-version }}
+        '${{ inputs.extra-black-options }}'
+        '${{ inputs.extra-yapf-options }}'
+        '${{ inputs.extra-isort-options }}'
+        '${{ inputs.extra-docformatter-options }}'
+        '${{ inputs.extra-pycodestyle-options }}'
+        '${{ inputs.extra-autopep8-options }}'
+        '${{ inputs.extra-pydocstyle-options }}'
+        '${{ inputs.extra-mypy-options }}'
+        '${{ inputs.extra-pylint-options }}'
+        '${{ inputs.extra-flake8-options }}'
+        '${{ inputs.extra-mccabe-options }}'
+        '${{ inputs.extra-radon-options }}'
+        '${{ inputs.extra-rstcheck-options }}'
+        '${{ inputs.extra-manifest-options }}'
+        '${{ inputs.extra-pyroma-options }}'
+      shell: bash
+
