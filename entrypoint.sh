@@ -67,8 +67,6 @@ do
     echo Adding matcher $matcher
     echo "::add-matcher::${matcher}"
 done
-echo "TERM: changing from $TERM -> xterm"
-export TERM=xterm
 
 # Get the python version and architecture to use for this run.
 python-version=${48}
