@@ -209,7 +209,6 @@ runs:
       with:
         python-version: ${{ inputs.python-version }}
         architecture: ${{ inputs.architecture }}
-        cache: pip
 
     - name: Linux Lint
       if: ${{ runner.os == 'Linux' }}
