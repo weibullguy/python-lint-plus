@@ -217,35 +217,35 @@ runs:
         '${{ inputs.python-root-list }}'
         '${{ inputs.virtual-env }}'
         ${{ inputs.use-black }}
-        ${{ inputs.black-version }}
+        '${{ inputs.black-version }}'
         ${{ inputs.use-yapf }}
-        ${{ inputs.yapf-version }}
+        '${{ inputs.yapf-version }}'
         ${{ inputs.use-isort }}
-        ${{ inputs.isort-version }}
+        '${{ inputs.isort-version }}'
         ${{ inputs.use-docformatter }}
-        ${{ inputs.docformatter-version }}
+        '${{ inputs.docformatter-version }}'
         ${{ inputs.use-pycodestyle }}
-        ${{ inputs.pycodestyle-version }}
+        '${{ inputs.pycodestyle-version }}'
         ${{ inputs.use-autopep8 }}
-        ${{ inputs.autopep8-version }}
+        '${{ inputs.autopep8-version }}'
         ${{ inputs.use-pydocstyle }}
-        ${{ inputs.pydocstyle-version }}
+        '${{ inputs.pydocstyle-version }}'
         ${{ inputs.use-mypy }}
-        ${{ inputs.mypy-version }}
+        '${{ inputs.mypy-version }}'
         ${{ inputs.use-pylint }}
-        ${{ inputs.pylint-version }}
+        '${{ inputs.pylint-version }}'
         ${{ inputs.use-flake8 }}
-        ${{ inputs.flake8-version }}
+        '${{ inputs.flake8-version }}'
         ${{ inputs.use-mccabe }}
-        ${{ inputs.mccabe-version }}
+        '${{ inputs.mccabe-version }}'
         ${{ inputs.use-radon }}
-        ${{ inputs.radon-version }}
+        '${{ inputs.radon-version }}'
         ${{ inputs.use-rstcheck }}
-        ${{ inputs.rstcheck-version }}
+        '${{ inputs.rstcheck-version }}'
         ${{ inputs.use-check-manifest }}
-        ${{ inputs.check-manifest-version }}
+        '${{ inputs.check-manifest-version }}'
         ${{ inputs.use-pyroma }}
-        ${{ inputs.pyroma-version }}
+        '${{ inputs.pyroma-version }}'
         '${{ inputs.extra-black-options }}'
         '${{ inputs.extra-yapf-options }}'
         '${{ inputs.extra-isort-options }}'
