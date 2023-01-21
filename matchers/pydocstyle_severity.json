@@ -1,0 +1,21 @@
+{
+    "problemMatcher": [
+        {
+            "column": 1,
+            "pattern": [
+                {
+                    "regexp": "^(\\S*):(\\d*) .*",
+                    "file": 1,
+                    "line": 2
+                },
+                {
+                    "regexp": "^##\\[([a-z]*)\\]\\s*(D\\d*): (.*)$",
+                    "severity": 1,
+                    "message": 3,
+                    "code": 2
+                }
+            ],
+            "owner": "pydocstyle_severity"
+        }
+    ]
+}
