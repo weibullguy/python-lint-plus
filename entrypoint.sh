@@ -49,6 +49,30 @@
 # ${45} - extra-rstcheck-options
 # ${46} - extra-manifest-options
 # ${47} - extra-pyroma-options
+# ${48} - python-version
+# ${49) - architecture
+
+# actions path has the copy of this actions repo
+echo $RUNNER_OS
+if [ $RUNNER_OS = 'Windows' ]
+then
+    MATCHERS=$GITHUB_ACTION_PATH\matchers\*.json
+else
+    MATCHERS=$GITHUB_ACTION_PATH/matchers/*.json
+fi
+echo $MATCHERS
+
+for matcher in $MATCHERS
+do
+    echo Adding matcher $matcher
+    echo "::add-matcher::${matcher}"
+done
+echo "TERM: changing from $TERM -> xterm"
+export TERM=xterm
+
+# Get the python version and architecture to use for this run.
+python-version=${48}
+architecture=${49}
 
 # Create a virtual environment to run tools.
 echo "Creating virtual environment: $2"

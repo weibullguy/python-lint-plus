@@ -1,0 +1,15 @@
+{
+    "problemMatcher": [
+      {
+        "pattern": [
+          {
+            "regexp": "^#{0,2}\\[([a-z]*)\\](\\S*): (\\S*) (.*)$",
+            "file": 3,
+            "severity": 1,
+            "message": 4
+          }
+        ],
+        "owner": "isort_severity"
+      }
+    ]
+  }

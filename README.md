@@ -51,7 +51,7 @@ Basic:
 ```yml
 steps:
   - uses: actions/checkout@v2
-  - uses: weibullguy/python-lint-plus@master
+  - uses: weibullguy/python-lint-plus@v1.11.0
 ```
 
 Options:
@@ -59,7 +59,7 @@ Options:
 ```yml
 steps:
   - uses: actions/checkout@v2
-  - uses: weibullguy/python-lint-plus@master
+  - uses: weibullguy/python-lint-plus@v1.11.0
     with:
       python-root-list: "tests"
       virtual-env: "python-lint-plus"
@@ -151,7 +151,7 @@ the files.
 ```yml
 steps:
   - uses: actions/checkout@v2
-  - uses: weibullguy/python-lint-plus@master
+  - uses: weibullguy/python-lint-plus@v1.11.0
     with:
       python-root-list: "tests"
       virtual-environment: "python-lint-plus"
@@ -173,7 +173,7 @@ available on PyPi with a version number greater than or equal to 6.1.0.
 ```yml
 steps:
   - uses: actions/checkout@v2
-  - uses: weibullguy/python-lint-plus@master
+  - uses: weibullguy/python-lint-plus@v1.11.0
     with:
       python-root-list: "tests"
       virtual-env: "python-lint-plus"
