@@ -77,7 +77,7 @@ echo "Creating virtual environment: $2"
 python3 -m venv $2
 echo "Activating virtual environment: $2"
 echo ""
-source $2/bin/activate
+. $2/bin/activate
 pip install -U -q pip
 
 echo "Commencing tool run"
