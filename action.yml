@@ -31,7 +31,7 @@ inputs:
   use-isort:
     description: "Use isort"
     required: false
-    default: true
+    default: false
   isort-version:
     description: "The version of isort to use"
     required: false
@@ -39,7 +39,7 @@ inputs:
   use-docformatter:
     description: "Use docformatter"
     required: false
-    default: true
+    default: false
   docformatter-version:
     description: "The version of docformatter to use"
     required: false
@@ -47,7 +47,7 @@ inputs:
   use-pycodestyle:
     description: "Use pycodestyle"
     required: false
-    default: true
+    default: false
   pycodestyle-version:
     description: "The version of pycodestyle to use"
     required: false
@@ -63,7 +63,7 @@ inputs:
   use-pydocstyle:
     description: "Use pydocstyle"
     required: false
-    default: true
+    default: false
   pydocstyle-version:
     description: "The version of pydocstyle to use"
     required: false
@@ -71,7 +71,7 @@ inputs:
   use-mypy:
     description: "Use mypy"
     required: false
-    default: true
+    default: false
   mypy-version:
     description: "The version of mypy to use"
     required: false
@@ -79,7 +79,7 @@ inputs:
   use-pylint:
     description: "Use Pylint"
     required: false
-    default: true
+    default: false
   pylint-version:
     description: "The version of pylint to use"
     required: false
@@ -87,7 +87,7 @@ inputs:
   use-flake8:
     description: "Use Flake8"
     required: false
-    default: true
+    default: false
   flake8-version:
     description: "The version of flake8 to use"
     required: false
@@ -111,7 +111,7 @@ inputs:
   use-rstcheck:
     description: "Use rstcheck"
     required: false
-    default: true
+    default: false
   rstcheck-version:
     description: "The version of rstcheck to use"
     required: false
@@ -119,7 +119,7 @@ inputs:
   use-check-manifest:
     description: "Use check-manifest"
     required: false
-    default: true
+    default: false
   check-manifest-version:
     description: "The version of check-manifest to use"
     required: false
@@ -127,7 +127,7 @@ inputs:
   use-pyroma:
     description: "Use pyroma"
     required: false
-    default: true
+    default: false
   pyroma-version:
     description: "The version of pyroma to use"
     required: false

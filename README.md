@@ -31,16 +31,20 @@ recommended that the tools you use in this action be used in-line with your
 editor or IDE and/or as pre-commit hooks.  This action just verifies you didn't
 forget to do that.
 
-All tools are enabled by default with the exception of black and yapf.  It's
-certainly your prerogative to use as many autoformatters as you'd like, but I
-recommend using only one.  Which you choose should be enabled with the
-use-black or use-yapf input.
+All tools are disabled by default.  It's certainly your prerogative to use as 
+many autoformatters as you'd like, but I recommend using only one.  Which you 
+choose should be enabled with the use-black or use-yapf input.
 
 Each run of the action creates a virtual environment.  Each of the enabled
 tools is installed in this virtual environment before that tool is executed.
 The default name of the virtual environment is ```python-lint-plus```, but you 
 can set it to whatever you'd like with the ```virtual-env``` option.
-This can be helpful if you're running a matrix of various versions of python.
+This can be helpful if you're running a matrix of Python versions.
+
+To set the Python version to use for a tool run, pass the version string to the
+python-version input.  Python defaults to version 3.10.  The architecture (x86 
+or x64) can also be specified with the architecture input.  The default 
+architecture is x64.
 
 ## Usage
 
@@ -50,7 +54,7 @@ Basic:
 
 ```yml
 steps:
-  - uses: actions/checkout@v2
+  - uses: actions/checkout@v3
   - uses: weibullguy/python-lint-plus@v1.11.0
 ```
 
@@ -58,11 +62,13 @@ Options:
 
 ```yml
 steps:
-  - uses: actions/checkout@v2
+  - uses: actions/checkout@v3
   - uses: weibullguy/python-lint-plus@v1.11.0
     with:
       python-root-list: "tests"
       virtual-env: "python-lint-plus"
+      python-version: "3.10"
+      architecture: "x64"
       use-black: false
       black-version:
       use-yapf: false
