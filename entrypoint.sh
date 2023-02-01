@@ -78,7 +78,7 @@ python3 -m venv $2
 echo "Activating virtual environment: $2"
 echo ""
 . $2/bin/activate
-pip install -U -q pip
+pip install -U -q pip tomli
 
 echo "Commencing tool run"
 echo ""
