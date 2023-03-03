@@ -226,6 +226,7 @@ if [ "${17}" = true ] ; then
 
     pip install -q mypy${18}
 
+    mypy --install-types
     mypy ${40} $1
     exit_code=$?
 
