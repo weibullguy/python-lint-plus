@@ -54,7 +54,7 @@
 
 # actions path has the copy of this actions repo
 echo $RUNNER_OS
-if [ '$RUNNER_OS' = 'Windows' ]
+if [ "$RUNNER_OS" = "Windows" ]
 then
     MATCHERS=$GITHUB_ACTION_PATH\matchers\*.json
 else
