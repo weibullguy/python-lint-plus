@@ -54,25 +54,24 @@
 
 # actions path has the copy of this actions repo
 echo $RUNNER_OS
-if [ $RUNNER_OS = 'Windows' ]
+if [ "$RUNNER_OS" = "Windows" ]
 then
     MATCHERS=$GITHUB_ACTION_PATH\matchers\*.json
 else
     MATCHERS=$GITHUB_ACTION_PATH/matchers/*.json
 fi
-echo $MATCHERS
 
 for matcher in $MATCHERS
 do
-    echo Adding matcher $matcher
     echo "::add-matcher::${matcher}"
 done
 
 # Get the python version and architecture to use for this run.
-python-version=${48}
+python_version=${48}
 architecture=${49}
 
 # Create a virtual environment to run tools.
+echo ""
 echo "Creating virtual environment: $2"
 python3 -m venv $2
 echo "Activating virtual environment: $2"
@@ -80,7 +79,7 @@ echo ""
 . $2/bin/activate
 pip install -U -q pip tomli
 
-echo "Commencing tool run"
+echo "Commencing tool run..."
 echo ""
 
 # Run the autoformatters first.
@@ -372,3 +371,10 @@ if [ "${31}" = true ]; then
     fi
 fi
 
+# Clean up virtual environment.
+echo "Deactivating virtual environment: $2"
+deactivate
+echo "Removing virtual environment: $2"
+rm -fr $2 > /dev/null
+
+exit $exit_code
