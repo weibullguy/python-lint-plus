@@ -30,7 +30,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Setup tox environment
-        run: tox -vv --no-test
+        run: tox -vv --notest
       - name: Run tests with tox
         run: tox -e py --skip-pkg-install
 
