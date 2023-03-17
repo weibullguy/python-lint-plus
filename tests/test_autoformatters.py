@@ -77,10 +77,6 @@ class TestiSort:
         assert process.returncode == 0
         assert "isort ok" in process.stdout
 
-        ACTION_ARGS["python_root_list"] = ""
-        ACTION_ARGS["use_isort"] = "false"
-        ACTION_ARGS["extra_isort_options"] = ""
-
     @pytest.mark.unit
     def test_no_changes_with_options(self):
         """isort returns 0 with options on a file not needing changes."""
@@ -93,10 +89,6 @@ class TestiSort:
         assert process.returncode == 0
         assert "isort ok" in process.stdout
 
-        ACTION_ARGS["python_root_list"] = ""
-        ACTION_ARGS["use_isort"] = "false"
-        ACTION_ARGS["extra_isort_options"] = ""
-
     @pytest.mark.unit
     def test_changes_no_options(self):
         """isort returns 0 with no options on a file not needing changes."""
@@ -108,10 +100,6 @@ class TestiSort:
 
         assert process.returncode == 1
         assert "isort error" in process.stdout
-
-        ACTION_ARGS["python_root_list"] = ""
-        ACTION_ARGS["use_isort"] = "false"
-        ACTION_ARGS["extra_isort_options"] = ""
 
     @pytest.mark.unit
     def test_changes_with_options(self):
@@ -145,10 +133,6 @@ class TestDocformatter:
         assert process.returncode == 0
         assert "docformatter ok" in process.stdout
 
-        ACTION_ARGS["python_root_list"] = ""
-        ACTION_ARGS["use_docformatter"] = "false"
-        ACTION_ARGS["extra_docformatter_options"] = ""
-
     @pytest.mark.unit
     def test_no_changes_with_options(self):
         """docformatter returns 0 with options on a file not needing changes."""
@@ -161,10 +145,6 @@ class TestDocformatter:
         assert process.returncode == 0
         assert "docformatter ok" in process.stdout
 
-        ACTION_ARGS["python_root_list"] = ""
-        ACTION_ARGS["use_docformatter"] = "false"
-        ACTION_ARGS["extra_docformatter_options"] = ""
-
     @pytest.mark.unit
     def test_changes_no_options(self):
         """docformatter returns 0 with no options on a file not needing changes."""
@@ -176,10 +156,6 @@ class TestDocformatter:
 
         assert process.returncode == 3
         assert "docformatter wants to format one or more files" in process.stdout
-
-        ACTION_ARGS["python_root_list"] = ""
-        ACTION_ARGS["use_docformatter"] = "false"
-        ACTION_ARGS["extra_docformatter_options"] = ""
 
     @pytest.mark.unit
     def test_changes_with_options(self):
