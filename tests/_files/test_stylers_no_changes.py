@@ -1,8 +1,8 @@
 #!/bin/env python3
 
 
-class ClassToTestAutoformatters:
-    """Class for testing autoformatters."""
+class ClassToTestStyleCheckers:
+    """Class for testing style checkers."""
 
     def method_with_short_lines(self):
         """This is a method with lines that do not need to be wrapped."""
