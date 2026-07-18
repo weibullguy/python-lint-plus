@@ -1,5 +1,5 @@
 # Container image that runs your code
-FROM python:3.14.6-slim
+FROM python:3.15-rc-alpine
 
 # Copies your code file from your action repository to the filesystem path `/` of the container
 COPY entrypoint.sh /entrypoint.sh
